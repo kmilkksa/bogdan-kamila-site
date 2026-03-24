@@ -171,10 +171,90 @@
                 height: 300px;
             }
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px 50px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(180, 140, 140, 0.4);
+            animation: scaleIn 0.4s;
+        }
+
+        .modal h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 30px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn.yes {
+            background: linear-gradient(135deg, #d4a5a5, #c9a9a9);
+            color: white;
+        }
+
+        .modal-btn.yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(212, 165, 165, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
     <div class="hearts-bg"></div>
+    
+    <div class="modal" id="loveModal">
+        <div class="modal-content">
+            <h2>Любишь Камиллу?</h2>
+            <div class="modal-buttons">
+                <button class="modal-btn yes" onclick="closeModal()">Да</button>
+                <button class="modal-btn yes" onclick="closeModal()">Да</button>
+            </div>
+        </div>
+    </div>
     
     <header>
         <h1>Камилла</h1>
@@ -216,5 +296,17 @@
         <p>С любовью, твой Богдан 💕</p>
         <p class="signature">Forever yours</p>
     </footer>
+
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('loveModal').classList.add('show');
+            }, 500);
+        };
+
+        function closeModal() {
+            document.getElementById('loveModal').classList.remove('show');
+        }
+    </script>
 </body>
 </html>
