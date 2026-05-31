@@ -146,6 +146,56 @@
             background: white;
         }
 
+        .like-section {
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 4rem;
+            transition: all 0.3s;
+            outline: none;
+            position: relative;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .like-btn.liked {
+            animation: heartBeat 0.4s ease;
+        }
+
+        .like-btn .heart {
+            transition: all 0.3s;
+        }
+
+        .like-count {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+
+        .like-label {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
         footer {
             text-align: center;
             padding: 60px 20px;
@@ -505,17 +555,46 @@
         </div>
     </div>
 
+    <div class="like-section">
+        <button class="like-btn" id="likeBtn" onclick="toggleLike()">
+            <span class="heart" id="heartIcon">🤍</span>
+        </button>
+        <div class="like-count" id="likeCount">0</div>
+        <div class="like-label">влюблённых</div>
+    </div>
+
     <footer>
         <p>С любовью, твой Богдан 💕</p>
         <p class="signature">Forever yours</p>
     </footer>
 
     <script>
+        var liked = localStorage.getItem('liked') === 'true';
+
         function closeLove() {
             document.getElementById('loveModal').classList.add('hidden');
         }
 
+        function updateLikeDisplay() {
+            var heart = document.getElementById('heartIcon');
+            var btn = document.getElementById('likeBtn');
+            if (liked) {
+                heart.textContent = '❤️';
+                btn.classList.add('liked');
+            } else {
+                heart.textContent = '🤍';
+                btn.classList.remove('liked');
+            }
+        }
+
+        function toggleLike() {
+            liked = !liked;
+            localStorage.setItem('liked', liked);
+            updateLikeDisplay();
+        }
+
         window.onload = function() {
+            updateLikeDisplay();
             document.getElementById('passwordInput').addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') checkPassword();
             });
