@@ -207,64 +207,111 @@
             }
         }
 
-        .modal {
-            display: none;
+        .gate {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
+            background: linear-gradient(135deg, #faf5f5 0%, #f0e8e8 50%, #faf5f5 100%);
+            z-index: 10000;
+            display: flex;
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s;
+            animation: fadeIn 0.5s;
         }
 
-        .modal.show {
-            display: flex;
+        .gate.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
         }
 
-        .modal-content {
+        .gate-content {
             background: white;
-            padding: 40px 50px;
+            padding: 50px 60px;
             border-radius: 25px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(180, 140, 140, 0.4);
-            animation: scaleIn 0.4s;
+            box-shadow: 0 20px 60px rgba(180, 140, 140, 0.3);
+            max-width: 500px;
+            width: 90%;
         }
 
-        .modal h2 {
+        .gate h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .gate .sub {
+            font-size: 1.1rem;
+            color: var(--accent);
             margin-bottom: 30px;
         }
 
-        .modal-buttons {
+        .gate .divider {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: var(--accent);
+            font-size: 0.9rem;
         }
 
-        .modal-btn {
-            padding: 15px 40px;
+        .gate .divider::before,
+        .gate .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--secondary);
+        }
+
+        .gate input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            border: 2px solid var(--secondary);
+            border-radius: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .gate input:focus {
+            border-color: var(--primary);
+        }
+
+        .gate .error {
+            color: #e74c3c;
+            font-size: 0.95rem;
+            min-height: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .gate .submit-btn {
+            width: 100%;
+            padding: 15px;
             font-size: 1.2rem;
             font-family: 'Cormorant Garamond', serif;
             border: none;
             border-radius: 30px;
             cursor: pointer;
+            background: linear-gradient(135deg, #d4a5a5, #c9a9a9);
+            color: white;
             transition: all 0.3s;
         }
 
-        .modal-btn.yes {
-            background: linear-gradient(135deg, #d4a5a5, #c9a9a9);
-            color: white;
+        .gate .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(212, 165, 165, 0.4);
         }
 
-        .modal-btn.yes:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 30px rgba(212, 165, 165, 0.4);
+        .gate .payment-card {
+            margin: 0 auto;
         }
 
         .payment {
@@ -334,14 +381,23 @@
 </head>
 <body>
     <div class="hearts-bg"></div>
-    
-    <div class="modal" id="loveModal">
-        <div class="modal-content">
-            <h2>Любишь Камиллу?</h2>
-            <div class="modal-buttons">
-                <button class="modal-btn yes" onclick="closeModal()">Да</button>
-                <button class="modal-btn yes" onclick="closeModal()">Да</button>
-            </div>
+
+    <div class="gate" id="siteGate">
+        <div class="gate-content">
+            <h2>Для Камиллы 💕</h2>
+            <p class="sub">Поддержи автора или введи пароль</p>
+
+            <a class="payment-card" href="https://www.tbank.ru" target="_blank">
+                <div class="payment-label">СБП</div>
+                <div class="payment-phone">+7 922 827-22-29</div>
+                <div class="payment-bank">Т-Банк</div>
+            </a>
+
+            <div class="divider">или</div>
+
+            <input type="password" id="passwordInput" placeholder="Введи пароль" autocomplete="off">
+            <div class="error" id="errorMsg"></div>
+            <button class="submit-btn" onclick="checkPassword()">Войти</button>
         </div>
     </div>
     
@@ -412,13 +468,20 @@
 
     <script>
         window.onload = function() {
-            setTimeout(function() {
-                document.getElementById('loveModal').classList.add('show');
-            }, 500);
+            document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') checkPassword();
+            });
         };
 
-        function closeModal() {
-            document.getElementById('loveModal').classList.remove('show');
+        function checkPassword() {
+            var input = document.getElementById('passwordInput').value;
+            var error = document.getElementById('errorMsg');
+
+            if (input === 'bogdan') {
+                document.getElementById('siteGate').classList.add('hidden');
+            } else {
+                error.textContent = 'Неверный пароль. Попробуй еще или поддержи автора.';
+            }
         }
     </script>
 </body>
