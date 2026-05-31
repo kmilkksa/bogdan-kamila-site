@@ -171,6 +171,32 @@
             }
         }
 
+        .love-letter {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 50px 40px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--primary);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        .love-letter::before,
+        .love-letter::after {
+            content: '~';
+            display: block;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.4;
+            margin: 10px 0;
+        }
+
         @media (max-width: 600px) {
             .gallery {
                 grid-template-columns: 1fr;
@@ -275,6 +301,10 @@
         твоя улыбка освещает даже самый пасмурный день,<br>
         а твои глаза... в них я вижу <span>все моё счастье</span>.<br><br>
         Ты — моя муза, моё вдохновение, моя <span>вечная любовь</span> ❤️
+    </div>
+
+    <div class="love-letter">
+        Камилла, милая Камилла,<br>я влюблен в нее с 5 класса
     </div>
 
     <div class="gallery">
