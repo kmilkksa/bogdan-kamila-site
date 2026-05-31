@@ -267,6 +267,54 @@
             box-shadow: 0 10px 30px rgba(212, 165, 165, 0.4);
         }
 
+        .payment {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .payment h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .payment-card {
+            display: inline-block;
+            background: white;
+            padding: 30px 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(180, 140, 140, 0.15);
+            border: 1px solid var(--secondary);
+        }
+
+        .payment-phone {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin: 15px 0;
+            cursor: pointer;
+            user-select: all;
+        }
+
+        .payment-label {
+            font-size: 1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 5px;
+        }
+
+        .payment-bank {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-top: 5px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -339,6 +387,15 @@
         <div class="photo-card">
             <img src="IMAGE 2026-03-24 22:30:46.jpg" alt="Камилла">
             <div class="photo-caption">Любимая Камилла</div>
+        </div>
+    </div>
+
+    <div class="payment">
+        <h3>Поддержать автора 💝</h3>
+        <div class="payment-card">
+            <div class="payment-label">СБП</div>
+            <div class="payment-phone">+7 922 827-22-29</div>
+            <div class="payment-bank">Т-Банк</div>
         </div>
     </div>
 
