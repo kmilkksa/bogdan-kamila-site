@@ -209,6 +209,64 @@
             }
         }
 
+        .love-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 20000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .love-modal.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .love-modal-content {
+            background: white;
+            padding: 40px 50px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(180, 140, 140, 0.4);
+        }
+
+        .love-modal h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 30px;
+        }
+
+        .love-modal-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .love-modal-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(135deg, #d4a5a5, #c9a9a9);
+            color: white;
+        }
+
+        .love-modal-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(212, 165, 165, 0.4);
+        }
+
         .gate {
             position: fixed;
             top: 0;
@@ -366,6 +424,16 @@
 <body>
     <div class="hearts-bg"></div>
 
+    <div class="love-modal" id="loveModal">
+        <div class="love-modal-content">
+            <h2>Любишь Камиллу?</h2>
+            <div class="love-modal-buttons">
+                <button class="love-modal-btn" onclick="closeLove()">Да</button>
+                <button class="love-modal-btn" onclick="closeLove()">Да</button>
+            </div>
+        </div>
+    </div>
+
     <div class="gate" id="siteGate">
         <div class="gate-content">
             <h2>Для Камиллы 💕</h2>
@@ -443,6 +511,10 @@
     </footer>
 
     <script>
+        function closeLove() {
+            document.getElementById('loveModal').classList.add('hidden');
+        }
+
         window.onload = function() {
             document.getElementById('passwordInput').addEventListener('keydown', function(e) {
                 if (e.key === 'Enter') checkPassword();
